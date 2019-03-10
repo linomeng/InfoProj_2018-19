@@ -53,11 +53,20 @@ public class Scoreboard extends Entity
 
 	public void render(Screen screen)
 	{
-		Font.render("SCORE: "+player.score, screen, x, y, Colors.get(-1, -1, -1, 000), 1);
+		Font.render("SCORE: "+player.score, screen, x, y+16, Colors.get(-1, -1, -1, 000), 1);
+		Font.render("KILLS: "+player.monstersKilled, screen, x, y+32, Colors.get(-1, -1, -1, 000), 1);
+		
+		double accRatio=0;
+		if (Bullet.bulletsMissed==0) accRatio=1;
+		else{accRatio=1-((double)Bullet.bulletsMissed/(double)Bullet.bulletsShot);}
+		if (accRatio<0) accRatio=0;
+		if (accRatio>1) accRatio=1;
+		player.accuracy=accRatio;
+		Font.render("ACC: "+(int)Math.floor(accRatio*100)+"%", screen, x, y+48, Colors.get(-1, -1, -1, 000), 1);
 		
 		for (int i=0; i<fullHearts;i++)
 		{
-			renderField(screen, (x*i)+16, y+16, heartColor, 0, 2, 20, 21, 1);
+			screen.renderField((x*i)+16, y, heartColor, 0, 2, 20, 21, 1);
 			/*
 			screen.render(x+(i*16), y+16, 0 + 20 * 32, heartColor, 0, 1);
 			screen.render(x+(i*16)+8, y+16, 1 + 20 * 32, heartColor, 0, 1);
@@ -68,7 +77,7 @@ public class Scoreboard extends Entity
 		
 		if (halfHearts==1)
 		{
-			renderField(screen, (x*fullHearts)+16, y+16, heartColor, 2, 4, 20, 21, 1);
+			screen.renderField((x*fullHearts)+16, y, heartColor, 2, 4, 20, 21, 1);
 			/*
 			screen.render(x+(fullHearts*16), y+16, 2 + 20 * 32, heartColor, 0, 1);
 			screen.render(x+(fullHearts*16)+8, y+16, 3 + 20 * 32, heartColor, 0, 1);
@@ -79,7 +88,7 @@ public class Scoreboard extends Entity
 		
 		for (int i=0; i<emptyHearts;i++)
 		{
-			renderField(screen, (x*(fullHearts+halfHearts)+i*16)+16, y+16, heartColor, 4, 6, 20, 21, 1);
+			screen.renderField((x*(fullHearts+halfHearts)+i*16)+16, y, heartColor, 4, 6, 20, 21, 1);
 			/*
 			screen.render(x+(i*16)+((fullHearts+halfHearts)*16), y+16, 4 + 20 * 32, heartColor, 0, 1);
 			screen.render(x+(i*16)+((fullHearts+halfHearts)*16)+8, y+16, 5 + 20 * 32, heartColor, 0, 1);
@@ -88,7 +97,7 @@ public class Scoreboard extends Entity
 			*/
 		}
 		
-		renderField(screen, x+175, y, heartColor, 0, 6, 9, 13, 2);
+		screen.renderField(x+175, y, heartColor, 0, 6, 9, 13, 2);
 		
 		if (player.healthPoints<=0) gameOver();
 	}

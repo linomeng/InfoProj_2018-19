@@ -17,6 +17,8 @@ public class Bullet extends Projectile {
 	Player player = Game.player;
 	public ArrayList<Object> monsterArray = Monster.monsterArray;
 	public int range=10;
+	public static int bulletsShot=0;
+	public static int bulletsMissed=0;
 	
 	public Bullet(Level level, String name, int x, int y, int speed, int moveDir)
 	{
@@ -27,7 +29,7 @@ public class Bullet extends Projectile {
 		this.y=y;
 		this.speed=speed;
 		this.moveDir=moveDir;
-		player.changeTotalScore(-scorePoints);
+
 		level.addToEntityWaitlist(this);
 	}
 
@@ -51,7 +53,7 @@ public class Bullet extends Projectile {
 		}
 		else
 		{
-			die();
+			die(false);
 			// Unfertig: An Wand abprallen
 			//if (moveDir%2==0) moveDir++;
 			//else { moveDir--; }
@@ -67,7 +69,7 @@ public class Bullet extends Projectile {
 			if (calculateDist(x, ((Monster) current).getX(), y,((Monster)current).getY())<=range)
 			{
 				((Monster)current).changeHP(damage);
-				die();
+				die(true);
 			}
 		}
 	}
@@ -91,9 +93,17 @@ public class Bullet extends Projectile {
 		return false;
 	}
 	
-	public void die()
+	public void die(boolean cause)
 	{
+		if (!cause) bulletsMissed++;
+		else bulletsShot++;
+		die();
+	}
+
+	@Override
+	public void die() {
 		level.addToEntityRemovelist(this);
+		
 	}
 
 }

@@ -42,12 +42,13 @@ public class Game extends Canvas implements Runnable {
 	public static final int HEIGHT=WIDTH/10*14;
 	public static final int SCALE = 3;
 	public static final String NAME="Game";
+	public static final Dimension DIMENSIONS = new Dimension(WIDTH*SCALE,HEIGHT*SCALE);
 	
 	public static final String version="100319";
 	
 	public double nsPerTick = 1000000000D/60D;
 	
-	private JFrame frame;
+	JFrame frame;
 	
 	public boolean running=false;
 	
@@ -64,24 +65,9 @@ public class Game extends Canvas implements Runnable {
 	public static Scoreboard scoreboard;
 	public static boolean isRunning=true;
 	
-	public Game() {
-		setMinimumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
-		setMaximumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
-		setPreferredSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
+	public Game() 
+	{
 		
-		frame = new JFrame(NAME);
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new BorderLayout());
-		
-		frame.add(this,BorderLayout.CENTER);
-		frame.pack();
-		
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		
-		frame.setVisible(true);
-		frame.setTitle("InfoProj Version 100319");
 	}
 	
 	public void init()
@@ -105,7 +91,7 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
 		input = new InputHandler(this);
 		level = new Level(WIDTH/8,HEIGHT/8, 0);
-		player = new Player(level, 8, 8, input);
+		player = new Player(level, WIDTH/2, WIDTH/2, input);
 		new Monster(level, "monstör", 300, 300, 1);
 		scoreboard = new Scoreboard(level, screen, "Scoreboard", 16, level.width*8+4);
 		level.addEntity(player);
@@ -255,11 +241,6 @@ public class Game extends Canvas implements Runnable {
 	public synchronized void stop()
 	{
 		 running = false;
-	}
-	
-	public static void main(String[] args)
-	{
-		new Game().start();
 	}
 	
 	public void over()

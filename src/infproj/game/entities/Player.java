@@ -22,6 +22,7 @@ public class Player extends Mob
 	public int healthPoints=100;
 	public int score=0;
 	public int monstersKilled=0;
+	public double accuracy=1;
 
 	public Player(Level level, int x, int y, InputHandler input) {
 		super(level, "Player", x, y, 1);
@@ -114,7 +115,7 @@ public class Player extends Mob
 	
 	public void changeScore(int scorePoints)
 	{
-		changeTotalScore(scorePoints*monstersKilled);
+		changeTotalScore((int)((scorePoints/2)+(scorePoints*accuracy)*(monstersKilled*accuracy)));
 	}
 	
 	double currentChance=1;
@@ -125,7 +126,6 @@ public class Player extends Mob
 		currentChance-=(Monster.monsterArray.size())/currentChance;
 		
 		if (currentChance<1.5) currentChance=1.5;
-		System.out.println("yuh"+currentChance);
 	}
 	
 	public void randomGenerateMonster()

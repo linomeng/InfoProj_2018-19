@@ -14,8 +14,10 @@ public class Monster extends Mob {
 	protected int damage = 5;
 	private int color = Colors.get(-1, 111, 555, 311);
 	public boolean isMoving=false;
-	public int healthPoints=10;
+	public int defaultHP=10;
+	public int healthPoints=defaultHP;
 	public int scorePoints=20;
+	public int zIndex=1;
 	
 	public static ArrayList<Object> monsterArray = new ArrayList<Object>(); 
 
@@ -28,6 +30,8 @@ public class Monster extends Mob {
 		this.speed=speed;
 		monsterArray.add(this);
 		level.addToEntityWaitlist(this);
+		defaultHP+=player.monstersKilled/5;
+		healthPoints=defaultHP;
 	}
 	
 		int canAttackTimer=0;
@@ -96,6 +100,17 @@ public class Monster extends Mob {
 		screen.render(xOffset + modifier - (modifier * flipTop), yOffset, (xTile+1) + yTile * 32, color, flipTop, scale);
 		screen.render(xOffset + (modifier * flipBottom), yOffset + modifier, xTile + (yTile+1) * 32, color, flipBottom, scale);
 		screen.render(xOffset + modifier - (modifier * flipBottom), yOffset + modifier, (xTile+1) + (yTile+1) * 32, color, flipBottom, scale);
+		
+		if (healthPoints!=defaultHP&&healthPoints>0)
+		{
+			int i = (int)(10*((double)healthPoints/(double)defaultHP))-1;
+			if (i<1) i=1;
+			if (!(i>9)||(i<0))
+			{
+				screen.render(x, y-12, (i*2)+(19*32), Colors.get(-1, 005, 500, 050), 0, 1);
+				screen.render(x+8, y-12, (i*2)+1+(19*32), Colors.get(-1, 005, 500, 050), 0, 1);
+			}
+		}
 	}
 	
 	public void attack(Player player)
