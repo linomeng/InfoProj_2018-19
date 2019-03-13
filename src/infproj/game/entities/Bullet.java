@@ -11,7 +11,7 @@ public class Bullet extends Projectile {
 
 	public int moveDir=0;
 	public int damage=10;
-	private int color = Colors.get(-1, 111, 000, 541);
+	private int color = Colors.get(-1, 111, 430, 555);
 	private int scale=1;
 	public int scorePoints=2;
 	Player player = Game.player;

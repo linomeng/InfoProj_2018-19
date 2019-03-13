@@ -8,8 +8,8 @@ public abstract class Tile {
 
 	public static final Tile[] tiles = new Tile[256];
 	public static final Tile VOID = new BasicSolidTile(0, 0, 0 , Colors.get(000,-1,-1,-1));
-	public static final Tile STONE = new BasicSolidTile(1, 1, 0 , Colors.get(-1,333,-1,-1));
-	public static final Tile GRASS = new BasicTile(2, 2, 0 , Colors.get(-1,131,242,454));
+	public static final Tile STONE = new BasicSolidTile(1, 1, 0 , Colors.get(111,222,111,000));
+	public static final Tile GRASS = new BasicTile(2, 2, 0 , Colors.get(131,231,020,232));
 	public static final Tile HEALTHPLACE = new BasicTile(3, 2, 0 , Colors.get(-1,131,242,343));
 
 	protected byte id;

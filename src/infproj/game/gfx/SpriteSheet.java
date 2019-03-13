@@ -18,6 +18,8 @@ public class SpriteSheet {
 		
 		try {
 			image = ImageIO.read(SpriteSheet.class.getResource(path));
+			// Wenn sie hier einen Error bekommen, machen sie Rechtsklick 
+			// auf den "res"-Ordner > Build Path > Use as Source Folder 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

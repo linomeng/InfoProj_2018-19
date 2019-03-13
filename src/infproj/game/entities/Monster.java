@@ -12,7 +12,7 @@ public class Monster extends Mob {
 	public int range=10;
 	protected Player player = Game.player; 
 	protected int damage = 5;
-	private int color = Colors.get(-1, 111, 555, 311);
+	private int color = Colors.get(-1, 111, 500, 310);
 	public boolean isMoving=false;
 	public int defaultHP=10;
 	public int healthPoints=defaultHP;
@@ -107,8 +107,8 @@ public class Monster extends Mob {
 			if (i<1) i=1;
 			if (!(i>9)||(i<0))
 			{
-				screen.render(x, y-12, (i*2)+(19*32), Colors.get(-1, 005, 500, 050), 0, 1);
-				screen.render(x+8, y-12, (i*2)+1+(19*32), Colors.get(-1, 005, 500, 050), 0, 1);
+				screen.render(x, y-12, (i*2)+(19*32), Colors.get(-1, 500, -1, 050), 0, 1);
+				screen.render(x+8, y-12, (i*2)+1+(19*32), Colors.get(-1, 500, -1, 050), 0, 1);
 			}
 		}
 	}

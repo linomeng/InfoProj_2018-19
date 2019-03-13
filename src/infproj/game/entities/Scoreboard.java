@@ -53,8 +53,8 @@ public class Scoreboard extends Entity
 
 	public void render(Screen screen)
 	{
-		Font.render("SCORE: "+player.score, screen, x, y+16, Colors.get(-1, -1, -1, 000), 1);
-		Font.render("KILLS: "+player.monstersKilled, screen, x, y+32, Colors.get(-1, -1, -1, 000), 1);
+		Font.render("SCORE: "+player.score, screen, x, y+16, Colors.get(-1, -1, -1, 555), 1);
+		Font.render("KILLS: "+player.monstersKilled, screen, x, y+32, Colors.get(-1, -1, -1, 555), 1);
 		
 		double accRatio=0;
 		if (Bullet.bulletsMissed==0) accRatio=1;
@@ -62,7 +62,7 @@ public class Scoreboard extends Entity
 		if (accRatio<0) accRatio=0;
 		if (accRatio>1) accRatio=1;
 		player.accuracy=accRatio;
-		Font.render("ACC: "+(int)Math.floor(accRatio*100)+"%", screen, x, y+48, Colors.get(-1, -1, -1, 000), 1);
+		Font.render("ACC: "+(int)Math.floor(accRatio*100)+"%", screen, x, y+48, Colors.get(-1, -1, -1, 555), 1);
 		
 		for (int i=0; i<fullHearts;i++)
 		{

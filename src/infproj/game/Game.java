@@ -67,7 +67,25 @@ public class Game extends Canvas implements Runnable {
 	
 	public Game() 
 	{
+		setMinimumSize(new Dimension(DIMENSIONS));
+		setMaximumSize(new Dimension(DIMENSIONS));
+		setPreferredSize(new Dimension(DIMENSIONS));
 		
+		frame = new JFrame(this.NAME);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
+		
+		frame.setAlwaysOnTop(true); 
+		
+		frame.add(this,BorderLayout.CENTER);
+		frame.pack();
+		
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		
+		frame.setVisible(true);
+		frame.setTitle("InfoProj Version 100319");
 	}
 	
 	public void init()
@@ -165,7 +183,7 @@ public class Game extends Canvas implements Runnable {
 		int yOffset = player.y - (screen.height/2);
 		
 		level.renderTiles(screen, xOffset, yOffset);
-		Font.render("P", screen, player.x, player.y, Colors.get(-1, -1, -1, 000), 1);
+		//Font.render("P", screen, player.x, player.y, Colors.get(-1, -1, -1, 000), 1);
 	
 		/*
 		 * for (int x = 0; x < level.width; x++ )
@@ -243,8 +261,8 @@ public class Game extends Canvas implements Runnable {
 		 running = false;
 	}
 	
-	public void over()
+	public static void main(String[] args)
 	{
-		System.out.println("lol");
+		new Game().start();
 	}
 }
